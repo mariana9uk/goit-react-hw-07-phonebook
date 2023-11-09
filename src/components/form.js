@@ -8,6 +8,7 @@ import {
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
+import { addContactThunk } from 'redux/thunks';
 
 const validSchema = Yup.object().shape({
   name: Yup.string()
@@ -28,24 +29,20 @@ const validSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
- 
-const contacts = useSelector(state=>state.contacts.contacts)
+
+  const { items } = useSelector(state => state.contacts);
 
   const handleSubmit = (values, formikBag) => {
-    const isContactExists = contacts.find(
-  
-      contact => contact.text.name.toLowerCase() === values.name.toLowerCase()
-      
-    )
-  
+    const isContactExists = items.find(
+      contact => contact.name.toLowerCase() === values.name.toLowerCase()
+    );
 
     if (isContactExists) {
       alert(`Contact with name '${values.name}' already exists!`);
     } else {
-      dispatch(addContact(values));
+      dispatch(addContactThunk(values));
       formikBag.resetForm();
     }
-   
   };
 
   return (
