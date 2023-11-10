@@ -14,7 +14,8 @@ export const fetchContacts= async()=>{
 }
 export const addContact= async(contact)=>{
     try {
-        await axios.post('/contacts', contact)
+        const responce= await axios.post('/contacts', {contact})
+        return responce.data
     } catch (error) {
         console.log(error)   }
   
@@ -22,7 +23,8 @@ export const addContact= async(contact)=>{
 }
 export const deleteContact=async(id)=>{
     try {
-        await axios.delete(`/contacts:${id}`)  
+        const responce=  await axios.delete(`/contacts:${id}`)  
+        return responce.data
     } catch (error) {
         console.log(error) 
     }

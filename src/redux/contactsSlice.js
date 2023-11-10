@@ -1,7 +1,12 @@
 import { createSlice, isAnyOf, nanoid } from '@reduxjs/toolkit';
 import { addContactThunk, deleteContactThunk, getContactsThunk } from './thunks';
+import { getContacts } from './selectors';
 // import { InitialState } from './initialState';
-
+const InitialState ={
+  items: [],
+  isLoading: false,
+  error: null,
+}
 const handlePending = (state, action) => {
   state.isLoading = true;
 };
@@ -9,27 +14,23 @@ const handlePending = (state, action) => {
 const handleFulfilled = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.contacts = action.payload;
+  state.items = action.payload
 };
 const handleFulfilledAdd = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.contacts.push(action.payload)
+  state.items.push(action.payload)
 };
 const handleFulfilledDelete = (state, action) => {
   state.isLoading = false;
   state.error = null;
-  state.contacts.filter(contact=>contact.id!==action.payload.id)
+  state.items.filter(contact=>contact.id!==action.payload.id)
 };
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
 };
-const InitialState ={
-  items: [],
-  isLoading: false,
-  error: null,
-}
+
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: InitialState,
