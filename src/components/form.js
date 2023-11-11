@@ -7,7 +7,6 @@ import {
 } from './formStyled';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
 import { addContactThunk } from 'redux/thunks';
 import { getContacts } from 'redux/selectors';
 
@@ -30,14 +29,11 @@ const validSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-
-  const  items  = useSelector(getContacts);
-
+  const { items } = useSelector(getContacts);
   const handleSubmit = (values, formikBag) => {
     const isContactExists = items.find(
       contact => contact.name.toLowerCase() === values.name.toLowerCase()
     );
-
     if (isContactExists) {
       alert(`Contact with name '${values.name}' already exists!`);
     } else {

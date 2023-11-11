@@ -1,6 +1,7 @@
 import { ContactForm } from './form';
 import { ContactsList } from './ContactsList';
 import { Filter } from './Filter';
+import { ToastContainer } from 'react-toastify';
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
       <h2>Contacts</h2>
       <Filter />
       <ContactsList />
+      <ToastContainer/>
     </div>
   );
 };
