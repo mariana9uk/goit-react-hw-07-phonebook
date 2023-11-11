@@ -14,11 +14,11 @@ export const ContactsList = () => {
   }, [dispatch]);
   if (!items || items.length === 0) return;
   const filteredContacts = items.filter(contact =>
-    contact.name.toLowerCase().includes(filtered.toLowerCase())
+    contact.contact.contact.name.toLowerCase().includes(filtered.toLowerCase())
   );
   const contactsListItems = filteredContacts.map(contact => (
     <li key={contact.id}>
-      {contact.name}:{contact.number}
+      {contact.contact.contact.name}:{contact.contact.contact.number}
       <button
         type="button"
         onClick={() => dispatch(deleteContactThunk(contact.id))}
