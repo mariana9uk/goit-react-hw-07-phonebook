@@ -16,6 +16,7 @@ export const ContactsList = () => {
   const filteredContacts = items.filter(contact =>
     contact.contact.contact.name.toLowerCase().includes(filtered.toLowerCase())
   );
+  
   const contactsListItems = filteredContacts.map(contact => (
     <li key={contact.id}>
       {contact.contact.contact.name}:{contact.contact.contact.number}
